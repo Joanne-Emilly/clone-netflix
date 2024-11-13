@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import Tmdb from "./Tmdb";
+import Tmdb from "./tmdb";
+import MovieRow from "./components/MovieRow";
+import './App.css'
 
-// eslint-disable-next-line import/no-anonymous-default-export
-export default () => {
-
+const App = () => {
   const [movieList, setMovieList] = useState([]);
+
   useEffect(() => {
     const loadAll = async () => {
       // Pegando a lista total
@@ -12,25 +13,23 @@ export default () => {
       setMovieList(list)
       console.log(list)
     }
-
     loadAll()
   }, [])
 
   return (
     <div className="page">
-      Header
-      Destaque
+
 
       {/* listas */}
-      <section className="lists">
+      <section className="lists" >
         {movieList.map((item, key) => (
-          <div>
-            {item.title}
-          </div>
+          <MovieRow key={key} title={item.title} items={item.items} />
         ))}
       </section>
 
-      Footer
-    </div >
+
+    </div>
   );
 }
+
+export default App
