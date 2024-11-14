@@ -1,3 +1,4 @@
+import { wait } from "@testing-library/user-event/dist/utils";
 
 
 const API_KEY = 'f095f5543e13ce1bd3313506e7969dc1'
@@ -72,5 +73,23 @@ export default {
             },
 
         ]
+    },
+
+    getMovieInfo: async (movieId, type) => {
+        let info = {};
+
+        if (movieId) {
+            switch (type) {
+                case 'movie':
+                    info = await basicFetch(`/movie/${movieId}?language=pt-BR&api_key=${API_KEY}`)
+                    break
+                case 'tv':
+                    info = await basicFetch(`/tv/${movieId}?language=pt-BR&api_key=${API_KEY}`)
+                    break
+                default:
+            }
+        }
+        return info
     }
+
 }
