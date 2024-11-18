@@ -14,7 +14,6 @@ const App = () => {
       // Pegando a lista total
       let list = await Tmdb.getHomeList()
       setMovieList(list)
-      console.log(list)
 
       //Pegando o Featured
       let originals = list.filter(i => i.slug === 'originals')
