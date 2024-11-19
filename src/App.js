@@ -53,6 +53,11 @@ const App = () => {
           <MovieRow key={key} title={item.title} items={item.items} />
         ))}
       </section>
+
+      <footer>
+        Direitos de imagem para Netflix<br />
+        Dados coletados do site themoviedb.org
+      </footer>
     </div>
   );
 }
