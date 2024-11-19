@@ -4,11 +4,12 @@ import MovieRow from "./components/MovieRow"
 import FeaturedMovie from "./components/FeaturedMovie"
 import './App.css'
 import tmdb from "./tmdb"
+import Header from "./components/Header"
 
 const App = () => {
   const [movieList, setMovieList] = useState([])
   const [featuredData, setFeaturedData] = useState(null)
-
+  const [blackHeader, setBlackHeader] = useState(false)
   useEffect(() => {
     const loadAll = async () => {
       // Pegando a lista total
@@ -26,8 +27,23 @@ const App = () => {
     loadAll()
   }, [])
 
+  useEffect(() => {
+    const scrollListener = () => {
+      if (window.scrollY > 10) {
+        setBlackHeader(true)
+      } else {
+        setBlackHeader(false)
+      }
+    }
+    window.addEventListener('scroll', scrollListener)
+    return () => {
+      window.removeEventListener('scroll', scrollListener)
+    }
+  }, [])
+
   return (
     <div className="page">
+      <Header black={blackHeader} />
       {featuredData &&
         <FeaturedMovie item={featuredData} />
       }
